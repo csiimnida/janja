@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
 {
     private int maxHp = 3;
     private int hp = 3;
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
     public int Hp
     {
         get
@@ -16,9 +20,10 @@ public class Player : MonoBehaviour
         set
         {
             hp = value;
-            if (hp < 0)
+            if (hp <= 0)
             {
                 hp = 0;
+                Time.timeScale = 0;
             }
             else if (hp > maxHp)
             {

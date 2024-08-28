@@ -7,9 +7,13 @@ public class Player : MonoBehaviour
 {
     private int maxHp = 3;
     private int hp = 3;
+    [SerializeField] Transform enemys;
+
+    Animator animator;
     private void Awake()
     {
         Time.timeScale = 1;
+        animator = GetComponent<Animator>();
     }
     public int Hp
     {
@@ -20,6 +24,7 @@ public class Player : MonoBehaviour
         set
         {
             hp = value;
+            animator.SetInteger("Atom", hp);
             if (hp <= 0)
             {
                 hp = 0;
@@ -29,23 +34,6 @@ public class Player : MonoBehaviour
             {
                 hp = maxHp;
             }
-            HpChange();
-        }
-    }
-
-    private void HpChange()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < hp; i++)
-        {
-            if (i < transform.childCount)
-            {
-                transform.GetChild(i).gameObject.SetActive(true);
-            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +41,10 @@ public class Player : MonoBehaviour
         if (collision.transform.CompareTag("Enemy"))
         {
             Hp--;
+            for (int i = enemys.childCount - 1; i >= 0; i--)
+            {
+                Destroy(enemys.GetChild(i).gameObject);
+            }
         }
     }
 }

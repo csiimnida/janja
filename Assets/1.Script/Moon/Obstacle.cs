@@ -11,6 +11,6 @@ public class Obstacle : MonoBehaviour
     public void ObstacleSpawned()
     {
         randPos = new Vector2(Random.Range(randPosStartX, randPosEndX), Y);
-        Instantiate(obstacles[Random.Range(0, obstacles.Length)],randPos,Quaternion.identity);
+        Instantiate(obstacles[Random.Range(0, obstacles.Length)],randPos,Quaternion.identity,transform);
     }
 }

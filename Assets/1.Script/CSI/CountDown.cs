@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CountDown : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class CountDown : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartCountdown());
         _audio.clip = CountdownClip;
+        _audio.Play();
+        StartCoroutine(StartCountdown());
         Time.timeScale = 0;
 
     }
@@ -37,8 +39,18 @@ public class CountDown : MonoBehaviour
 
         }
 
-        _textMeshProUGUI.text = "Countdown Finished";
+        _textMeshProUGUI.text = "";
+        gameObject.GetComponentInChildren<Image>().color = new Color(0, 0, 0, 0);
+
         Time.timeScale = 1;
+        StartCoroutine(wait());
+    }
+
+    private IEnumerator wait()
+    {
+        _audio.pitch = 1.4f;
+        _audio.Play();
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 }

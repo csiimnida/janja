@@ -16,7 +16,7 @@ public class StartSEEn : MonoBehaviour
     }
     private void Awake()
     {
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.8f;
     }
 }
     

@@ -29,6 +29,7 @@ public class CountDown : MonoBehaviour
     {
         while (_countdownTime > 0)
         {
+            
             _audio.Play();
             _textMeshProUGUI.text = _countdownTime.ToString();
             yield return new WaitForSecondsRealtime(1f);
